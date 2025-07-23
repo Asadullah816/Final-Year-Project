@@ -1,0 +1,67 @@
+ <div class="career-mega-menu">
+                    <div class="container mega-container">
+                        <div class="mega-row row d-flex jusitfy-content-center align-items-center">
+                            <div class="mega-col position-relative col-lg-4 col-md-4 col-12">
+                                <a href="#" class="mega-link">Career Counseling</a>
+                                <div class="mega-accordion">
+                                    <ul
+                                        class="mega-acc-ul p-0 d-flex justify-content-start align-item-center flex-column">
+                                        <li><a href="">accordion item</a></li>
+                                        <li><a href="">accordion item</a></li>
+                                        <li><a href="">accordion item</a></li>
+
+                                    </ul>
+
+                                </div>
+                            </div>
+
+                            <div class="mega-col col-lg-4 col-md-4 col-12">
+                                <a href="#" class="mega-link">Computer Literacy & Applications</a>
+                            </div>
+                            <div class="mega-col col-lg-4 col-md-4 col-12">
+                                <a href="#" class="mega-link">Data Analytics in Health Sciences</a>
+                            </div>
+                            <div class="mega-col col-lg-4 col-md-4 col-12">
+                                <a href="#" class="mega-link">English Language
+                                </a>
+                            </div>
+                            <div class="mega-col col-lg-4 col-md-4 col-12">
+                                <a href="#" class="mega-link">Food Handling and Safety</a>
+                            </div>
+                            <div class="mega-col col-lg-4 col-md-4 col-12">
+                                <a href="#" class="mega-link">Foundations of Sustainability & Skills Development</a>
+                            </div>
+                            <div class="mega-col col-lg-4 col-md-4 col-12">
+                                <a href="#" class="mega-link">Fundamentals of Accounting and Bookkeeping</a>
+                            </div>
+                            <div class="mega-col col-lg-4 col-md-4 col-12">
+                                <a href="#" class="mega-link">Industrial Management Techniques</a>
+                            </div>
+                            <div class="mega-col col-lg-4 col-md-4 col-12">
+                                <a href="#" class="mega-link">Innovative Business & Entrepreneurship</a>
+                            </div>
+                            <div class="mega-col col-lg-4 col-md-4 col-12">
+                                <a href="#" class="mega-link">Medical Aesthetics</a>
+                            </div>
+                            <div class="mega-col col-lg-4 col-md-4 col-12">
+                                <a href="#" class="mega-link">Online Business and Digital Marketing</a>
+                            </div>
+                            <div class="mega-col col-lg-4 col-md-4 col-12">
+                                <a href="#" class="mega-link">Pet Grooming and Care</a>
+                            </div>
+                            <div class="mega-col col-lg-4 col-md-4 col-12">
+                                <a href="#" class="mega-link">Professional Skills Development for Immigrants</a>
+                            </div>
+                            <div class="mega-col col-lg-4 col-md-4 col-12">
+                                <a href="#" class="mega-link">Safety & Health Risk Management</a>
+                            </div>
+                            <div class="mega-col col-lg-4 col-md-4 col-12">
+                                <a href="#" class="mega-link">TikTok MarketPro (Commerce Connect)</a>
+                            </div>
+                            <div class="mega-col col-lg-4 col-md-4 col-12">
+                                <a href="#" class="mega-link">Mental Health Insights and Strategies</a>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>

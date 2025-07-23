@@ -1,6 +1,14 @@
 @extends('admin.adminlayout')
-@section('title', 'addcourses')
+@section('title', 'Add Courses')
 @section('content')
+    @if ($errors->any())
+        @foreach ($errors->all() as $error)
+            <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                <i class="fa fa-exclamation-circle me-2"></i>{{ $error }}
+                <button type="button" class="btn-close text-danger" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        @endforeach
+    @endif
     <div class="bg-secondary rounded h-100 p-4">
         <h6 class="mb-4">Add Courses</h6>
         <form action="{{ route('addcourse') }}" method="POST" enctype="multipart/form-data">
@@ -21,6 +29,12 @@
                 <label for="duration" class="form-label">Course duration</label>
                 <input type="text" class="form-control" name="duration" id="name">
             </div>
+            <select class="form-select form-select-lg mb-3" name="category_id" aria-label=".form-select-lg example">
+                <option selected="" disabled>Course Category</option>
+                @foreach ($categories as $data)
+                    <option value="{{ $data->id }}">{{ $data->name }}</option>
+                @endforeach
+            </select>
             <div class="mb-3">
                 <label for="start_date" class="form-label">Start date</label>
                 <input type="date" class="form-control" name="start_date" id="start_date">

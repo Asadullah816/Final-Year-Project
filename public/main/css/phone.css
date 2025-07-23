@@ -1,0 +1,215 @@
+@media(max-width:1580px) {
+    .career-mega-menu {
+        left: 31%;
+        width: 35%;
+    }
+
+}
+
+@media(min-width:1580px) {
+    .container {
+        max-width: 1560px;
+    }
+}
+
+@media(max-width:1438px) {
+    .career-mega-menu {
+        width: 38%;
+        overflow: auto;
+    }
+
+    .header {
+        padding: 2rem 5%;
+    }
+
+    .navbar-item:hover .career-mega-menu {
+        left: 27.5%;
+        height: 100vh;
+        overflow-y: auto;
+    }
+
+    .mega-container {
+        padding-bottom: 50px;
+    }
+
+    .hero-heading {
+        padding-top: 150px;
+        font-size: 6rem;
+        width: 60%;
+        line-height: 60px;
+    }
+
+    .hero-para {
+        width: 75%;
+    }
+
+    .carousel-control-prev {
+        left: -60px;
+    }
+
+    .carousel-control-next {
+        right: -50px;
+    }
+}
+
+@media(max-width:1160px) {
+    .career-mega-menu {
+        width: 44%;
+        left: 22%;
+    }
+
+    .carousel-control-next {
+        right: 0px;
+    }
+
+    .hero-heading {
+        width: 75%;
+    }
+
+    .header {
+        padding: 2rem 3%;
+    }
+
+}
+
+@media(max-width:1022px) {
+    .header .navbar-custom.active {
+        right: 0rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        width: 100%;
+        top: 10rem;
+        row-gap: 10px;
+        transition: 0.4s linear;
+    }
+
+    .navbar-item:hover .career-mega-menu {
+        top: 10rem;
+        width: 100%;
+        left: 0%;
+        background-color: white;
+        overflow: auto;
+        z-index: 100;
+        overflow-y: auto;
+    }
+
+    .hero-heading {
+        width: 100%;
+    }
+
+    .accordion-item,
+    .accordion-body {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+
+    .sub-courses {
+        top: 7rem;
+        left: 26rem;
+        z-index: 100;
+    }
+
+    .carousel-control-prev,
+    .carousel-control-next {
+        display: none;
+    }
+
+    .carousel-indicators [data-mdb-target] {
+        box-sizing: content-box;
+        flex: 0 1 auto;
+        width: 12px;
+        height: 12px;
+        padding: 0;
+        margin-right: 3px;
+        margin-left: 3px;
+        text-indent: -999px;
+        cursor: pointer;
+        background-color: #fff;
+        background-clip: padding-box;
+        border: 0;
+        border: 1px solid transparents;
+        border-radius: 100px;
+        opacity: .5;
+        transition: opacity .6s ease;
+    }
+
+    .carousel-indicators .active {
+        opacity: 1;
+    }
+}
+
+@media(max-width:767px) {
+    /* .header .navbar-custom.active {
+        top: 9rem;
+    } */
+
+    .navbar-item:hover .career-mega-menu {
+        top: 10rem;
+        width: 100%;
+        left: 0%;
+        background-color: white;
+        overflow-y: auto;
+        z-index: 100;
+    }
+
+    .career-courses {
+        padding: 0px;
+    }
+
+    .main-courses {
+        padding: 5px 0px;
+    }
+
+    .career-link {
+        margin: 0 !important;
+    }
+
+    .sub-courses {
+        top: 9rem;
+        left: 0rem;
+        z-index: 100;
+        border: 1px solid #b15351b1;
+    }
+
+    .hero-heading {
+        padding: 0px;
+        font-size: 5rem;
+        line-height: 45px;
+    }
+
+    .hero-para {
+        width: 100%;
+        padding: 20px 50px 0px 0px;
+    }
+
+    .header {
+        padding: 2rem 1%;
+    }
+
+    .input-dev {
+        display: flex;
+        flex-direction: column;
+        row-gap: 10px;
+    }
+
+    .reg-form {
+        row-gap: 10px;
+        width: 100%;
+    }
+
+    .header .login-form.active {
+        right: 0rem;
+        top: 100%;
+    }
+
+    .select-dev {
+        padding: 0px 5px;
+    }
+
+    /* ==================== Regoster Online page =============== */
+}

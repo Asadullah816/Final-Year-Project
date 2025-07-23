@@ -14,13 +14,14 @@ return new class extends Migration
         Schema::create('courses', function (Blueprint $table) {
             $table->id();
             $table->string("name");
-            $table->string('description');
+            $table->text('description');
             $table->string('instructor');
             $table->string('duration')->nullable();
             $table->date('start_date')->nullable();
             $table->date('end_date')->nullable();
             $table->integer('price')->nullable();
             $table->string('image')->nullable();
+            $table->foreignId('category_id')->constrained('categories');
             $table->timestamps();
         });
     }

@@ -1,6 +1,14 @@
-@extends('admin.components.header');
-@section('title','Register')
+@extends('admin.components.header')
+@section('title', 'Register')
 <div class="container-fluid">
+    @if ($errors->any())
+        @foreach ($errors->all() as $error)
+            <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                <i class="fa fa-exclamation-circle me-2"></i>{{ $error }}
+                <button type="button" class="btn-close text-danger" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        @endforeach
+    @endif
     <div class="row h-100 align-items-center justify-content-center" style="min-height: 100vh;">
         <div class="col-12 col-sm-8 col-md-6 col-lg-5 col-xl-4">
             <form method="POST" action="{{ route('register') }}">

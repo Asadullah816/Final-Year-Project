@@ -1,13 +1,23 @@
 @extends('admin.adminlayout')
-@section('title', 'addcourses')
+@section('title', 'Update Courses')
 @section('content')
+    @if ($errors->any())
+        @foreach ($errors->all() as $error)
+            <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                <i class="fa fa-exclamation-circle me-2"></i>{{ $error }}
+                <button type="button" class="btn-close text-danger" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        @endforeach
+    @endif
     <div class="bg-secondary rounded h-100 p-4">
         <h6 class="mb-4">Add Courses</h6>
         <form action="{{ route('updatecourse', $course->id) }}" method="POST" enctype="multipart/form-data">
+
             @csrf
             <div class="mb-3">
                 <label for="name" class="form-label">Course Name</label>
-                <input type="text" class="form-control" name="name" value="{{ $course->name }}" id="name" required>
+                <input type="text" class="form-control" name="name" value="{{ $course->name }}" id="name"
+                    required>
             </div>
             <div class="mb-3">
                 <label for="description" class="form-label">Course Description</label>
@@ -44,7 +54,7 @@
                     <img src="{{ asset('storage/' . $course->image) }}" alt="Course Image" width="150">
                 @endif
             </div>
-            <button type="submit" class="btn btn-primary">Add Course</button>
+            <button type="submit" class="btn btn-primary">Update Course</button>
         </form>
     </div>
 

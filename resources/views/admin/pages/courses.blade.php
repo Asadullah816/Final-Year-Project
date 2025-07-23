@@ -3,7 +3,7 @@
 @section('content')
     <div class="bg-secondary rounded h-100 p-4">
         @if (count($data) > 0)
-            <h6 class="mb-4">Hoverable Table</h6>
+            <h6 class="mb-4">Courses Table</h6>
             <table class="table table-hover">
                 <thead>
                     <tr>
