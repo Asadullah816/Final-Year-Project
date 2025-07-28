@@ -22,6 +22,13 @@ Route::middleware('guest')->group(function () {
 Route::middleware(['auth'])->group(function () {
     Route::post('logout', [UserController::class, 'logout'])->name('logout');
     Route::get('dashboard', [CourseController::class, 'index'])->name('dashboard');
+    Route::post('qualification', [CourseController::class, 'qualification'])->name('qualification');
+    Route::get('profile', [CourseController::class, 'profile'])->name('profile');
+    Route::view('information', 'pages.addinformation')->name('addinfo');
+    Route::post('information', [CourseController::class, 'information'])->name('addinfo');
+    Route::post('apply', [CourseController::class, 'apply'])->name('apply');
+    Route::get('applications', [CourseController::class, 'applications'])->name('applications');
+    Route::get('application/{id}', [CourseController::class, 'application'])->name('application');
 });
 //  -------------------- AUTH --------------------------------
 // ===========================================================
@@ -37,6 +44,7 @@ Route::middleware([AdminMiddleware::class])->prefix('dashboard')->group(function
     Route::get('deletecourse/{id}', [CourseController::class, 'deletecourse'])->name('deletecourse');
     Route::get('updatecourse/{id}', [CourseController::class, 'showcourse'])->name('updatecourse');
     Route::post('updatecourse/{id}', [CourseController::class, 'updatecourse'])->name('updatecourse');
+    Route::post('status/{id}', [CourseController::class, 'approved'])->name('status');
 });
 //  -------------------- ADMIN -------------------------------
 // ===========================================================
@@ -49,3 +57,5 @@ Route::view('course', 'pages.singlecourse')->name('course');
 Route::get("/", [CourseController::class, 'home'])->name('home');
 Route::view('/addpost', 'pages/addpost')->name('addpost');
 Route::post("/add", [HomeController::class, "Add"])->name("add");
+Route::view('qualification', 'pages.addqualification')->name('qualification');
+Route::get('singlecourse/{id}', [CourseController::class, 'singlecourse'])->name('singlecourse');

@@ -13,6 +13,14 @@ return new class extends Migration
     {
         Schema::create('qualifications', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
+            $table->string('obtain_marks');
+            $table->string('total_marks');
+            $table->string('percentage');
+            $table->date('passing_year');
+            $table->string('board_name');
+            $table->string('institute_name');
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->timestamps();
         });
     }

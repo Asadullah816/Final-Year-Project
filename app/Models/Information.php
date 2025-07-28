@@ -4,9 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Qualification extends Model
+class Information extends Model
 {
-    public function user()
+    public function users()
     {
         return $this->belongsTo(User::class);
     }

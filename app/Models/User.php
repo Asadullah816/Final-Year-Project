@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use PDO;
 
 class User extends Authenticatable
 {
@@ -48,6 +49,18 @@ class User extends Authenticatable
     }
     public function posts(): HasMany
     {
-        return $this->hasMany(Post::class); 
+        return $this->hasMany(Post::class);
+    }
+    public function qualification()
+    {
+        return $this->hasMany(Qualification::class);
+    }
+    public function information()
+    {
+        return $this->hasOne(Information::class);
+    }
+    public function applications()
+    {
+        return $this->hasMany(Application::class);
     }
 }

@@ -27,13 +27,13 @@
 
     <header class="header">
         <div class="logo_banner">
-            <a href="index.html" class="logo">
+            <a href="{{ route('home') }}" class="logo">
                 <img src="{{ asset('main/images/logo-transparent.png') }}" alt="" />
             </a>
         </div>
         <nav class="navbar-custom d-flex justify-content-center align-items-center shadow-0">
             <div class="navbar-item">
-                <a href="index.html" class="hover-underline  navbar-link">home</a>
+                <a href="{{ route('home') }}" class="hover-underline  navbar-link">home</a>
             </div>
 
             <div class="navbar-item">
@@ -58,7 +58,7 @@
                                             data-mdb-parent="#accordionFlushExample">
                                             <div class="accordion-body d-flex flex-column">
                                                 @foreach ($data->courses as $course)
-                                                    <a href=""
+                                                    <a href="{{ route('singlecourse', $course->id) }}"
                                                         class="navbar-link acc-link">{{ $course->name }}</a>
                                                 @endforeach
                                             </div>
@@ -296,9 +296,6 @@
             </div>
             </div>
             <div class="navbar-item">
-                <a href="onlineRegister.html" class="hover-underline navbar-link">Register Online</a>
-            </div>
-            <div class="navbar-item">
                 <a href="#staff" class="hover-underline navbar-link">BI Team</a>
             </div>
             <div class="navbar-item">
@@ -375,8 +372,8 @@
         <div class="box-container">
             <div class="box">
                 <div class="logo_banner-footer">
-                    <a href="#" class="logo">
-                        <img src="./images//logo-transparent.png" alt="" />
+                    <a href="{{ route('home') }}" class="logo">
+                        <img src="{{ asset('main/images//logo-transparent.png') }}" alt="" />
                     </a>
                 </div>
                 <div class="share">
@@ -406,7 +403,7 @@
 
         <div class="credit">
             Copyright © 2024 Brantford Skills Inc.
-            <img style="width: 20px" src="./images/image.png" />| All rights
+            <img style="width: 20px" src="{{ asset('images/image.png') }}" />| All rights
             reserved
         </div>
     </section>

@@ -24,7 +24,7 @@
                                 creativity, critical thinking, and a passion for sustainable
                                 growth, that transcends boundaries and transforms lives.
                             </p>
-                            <a href="#" class="cus-btn hero-link">
+                            <a href="{{ route('home') }}" class="cus-btn hero-link">
                                 <span class="text text-1 text-light">learn more</span>
                             </a>
 
@@ -93,7 +93,7 @@
 
         <div class="box-container">
             @foreach ($courses as $course)
-                <a href="">
+                <a href="{{ route('singlecourse', $course->id) }}">
                     <div class="box">
                         <img src="{{ asset('storage/' . $course->image) }}" alt="" />
                         <h3>{{ $course->name }}</h3>
@@ -275,9 +275,9 @@
             <form action="" class="round">
                 <h3>Send us a Message</h3>
                 <!-- <input type="text" placeholder="name" class="box">
-                                            <input type="email" placeholder="email" class="box">
-                                            <input type="number" placeholder="phone number" class="box">
-                                            <textarea placeholder="message" class="box" cols="30" rows="10"></textarea> -->
+                                                        <input type="email" placeholder="email" class="box">
+                                                        <input type="number" placeholder="phone number" class="box">
+                                                        <textarea placeholder="message" class="box" cols="30" rows="10"></textarea> -->
                 <a href="mailto:info@brantfordinstitute.ca" class="cus-btn">
                     <span class="text text-1">send message</span>
                 </a>

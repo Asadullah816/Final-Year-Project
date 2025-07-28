@@ -103,64 +103,81 @@
             }
         }
     </style>
-    </head>
 
-    <body>
-
-        <div class="container my-5 top-con">
-            <div class="row">
-                <div class="col-lg-7 mb-4 mb-lg-0">
-                    <div class="course-image-container shadow-lg rounded-3 overflow-hidden">
-                        <img src="{{ asset('admin/img.jpg') }}" alt="Course Name Thumbnail"
-                            class="img-fluid course-main-image">
-                    </div>
+    <div class="container my-5 top-con">
+        <div class="row">
+            @if (session('success'))
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <i class="fa fa-exclamation-circle me-2"></i>{{ session('success') }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
-
-                <div class="col-lg-5">
-                    <div class="course-details-card p-4 shadow-sm rounded-3">
-                        <h1 class="mb-3 text-primary">[Course Name Here, e.g., Mastering Modern Web Development]</h1>
-                        <p class="lead text-muted">By <strong class="text-dark">[Course Instructor Name, e.g., Jane
-                                Doe]</strong></p>
-
-                        <hr>
-
-                        <p class="course-description mb-4">
-                            [A concise, engaging description of the course. Highlight what students will learn or achieve.
-                            This should be a few sentences, not a full paragraph.]
-                            <br><br>
-                            This course will guide you through the essentials, practical applications, and advanced
-                            techniques, ensuring you gain hands-on experience and a strong foundational understanding.
-                        </p>
-
-                        <div class="row mb-3">
-                            <div class="col-6">
-                                <p class="mb-1"><i class="fas fa-clock text-info me-2"></i> <strong>Duration:</strong></p>
-                                <p class="fw-bold">[e.g., 40 Hours On-Demand]</p>
-                            </div>
-                            <div class="col-6">
-                                <p class="mb-1"><i class="fas fa-dollar-sign text-success me-2"></i>
-                                    <strong>Price:</strong>
-                                </p>
-                                <p class="fw-bold">[e.g., $99.99]</p>
-                            </div>
-                        </div>
-
-                        <div class="row mb-4">
-                            <div class="col-6">
-                                <p class="mb-1"><i class="fas fa-calendar-alt text-warning me-2"></i> <strong>Start
-                                        Date:</strong></p>
-                                <p class="fw-bold">[e.g., August 1, 2025]</p>
-                            </div>
-                            <div class="col-6">
-                                <p class="mb-1"><i class="fas fa-calendar-check text-danger me-2"></i> <strong>End
-                                        Date:</strong></p>
-                                <p class="fw-bold">[e.g., September 15, 2025]</p>
-                            </div>
-                        </div>
-
-                        <a href="#" class="btn btn-primary btn-lg w-100 mt-3">Enroll Now</a>
+            @endif
+            @if (session('error'))
+                <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                    <i class="fa fa-exclamation-circle me-2"></i>{{ session('error') }}
+                    <button type="button" class="btn-close text-danger" data-bs-dismiss="alert"
+                        aria-label="Close"></button>
+                </div>
+            @endif
+            @if ($errors->any())
+                @foreach ($errors->all() as $error)
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <i class="fa fa-exclamation-circle me-2"></i>{{ $error }}
+                        <button type="button" class="btn-close text-danger" data-bs-dismiss="alert"
+                            aria-label="Close"></button>
                     </div>
+                @endforeach
+            @endif
+            <div class="col-lg-7 mb-4 mb-lg-0">
+                <div class="course-image-container shadow-lg rounded-3 overflow-hidden">
+                    <img src="{{ asset('storage/' . $course->image) }}" alt="Course Name Thumbnail"
+                        class="img-fluid course-main-image">
+                </div>
+            </div>
+
+            <div class="col-lg-5">
+                <div class="course-details-card p-4 shadow-sm rounded-3">
+                    <h1 class="mb-3 text-primary">{{ $course->name }}</h1>
+                    <p class="lead text-muted">By <strong class="text-dark">{{ $course->instructor }}</strong></p>
+
+                    <hr>
+
+                    <p class="course-description mb-4">
+                        {{ $course->description }}
+                    </p>
+
+                    <div class="row mb-3">
+                        <div class="col-6">
+                            <p class="mb-1"><i class="fas fa-clock text-info me-2"></i> <strong>Duration:</strong></p>
+                            <p class="fw-bold">{{ $course->duration }}</p>
+                        </div>
+                        <div class="col-6">
+                            <p class="mb-1"><i class="fas fa-dollar-sign text-success me-2"></i>
+                                <strong>Price:</strong>
+                            </p>
+                            <p class="fw-bold">{{ $course->price }}</p>
+                        </div>
+                    </div>
+
+                    <div class="row mb-4">
+                        <div class="col-6">
+                            <p class="mb-1"><i class="fas fa-calendar-alt text-warning me-2"></i> <strong>Start
+                                    Date:</strong></p>
+                            <p class="fw-bold">{{ $course->start_date }}</p>
+                        </div>
+                        <div class="col-6">
+                            <p class="mb-1"><i class="fas fa-calendar-check text-danger me-2"></i> <strong>End
+                                    Date:</strong></p>
+                            <p class="fw-bold">{{ $course->end_date }}</p>
+                        </div>
+                    </div>
+                    <form action="{{ route('apply') }}" method="POST">
+                        @csrf
+                        <input type="hidden" name="course_id" value="{{ $course->id }}">
+                        <button type="submit" class="cus-btn qual-btn">Enroll Now</button>
+                    </form>
                 </div>
             </div>
         </div>
-    @endsection
+    </div>
+@endsection

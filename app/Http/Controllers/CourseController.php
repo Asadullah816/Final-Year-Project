@@ -2,20 +2,29 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Application;
 use App\Models\Category;
+use App\Models\Qualification;
 use App\Models\Course;
+use App\Models\Information;
 use App\Models\User;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use PDO;
 
 class CourseController extends Controller
 {
     public function index()
     {
+        $authuser = Auth::user();
         $courses = Course::all()->count();
         $user = User::where('admin', false)->get()->count();
+        $applications = Application::all();
         $categories = Category::all()->count();
-        return view('admin.dashboard', compact('courses', 'user', 'categories'));
+        $userapplication = $authuser->applications;
+        $userappcount = $authuser->applications->count();
+        return view('admin.dashboard', compact('courses', 'user', 'categories', 'userapplication', 'userappcount', 'applications'));
     }
     public function addcourseshow()
     {
@@ -64,6 +73,11 @@ class CourseController extends Controller
         $course = Course::find($id);
         return view('admin.pages.updateCourse', compact('course'));
     }
+    public function singleCourse($id)
+    {
+        $course = Course::find($id);
+        return view('pages.singlecourse', compact('course'));
+    }
     public function updatecourse(Request $req, $id)
     {
         $data = Course::find($id);
@@ -83,10 +97,100 @@ class CourseController extends Controller
         $data->save();
         return redirect('dashboard/courses');
     }
+    public function qualification(Request $req)
+    {
+
+        $user = Auth::user();
+        foreach ($req->qualification as  $data) {
+            $qual = new Qualification;
+            $qual->user_id = $user->id;
+            $qual->name = $data['name'];
+            $qual->obtain_marks = $data['obtain_marks'];
+            $qual->total_marks = $data['total_marks'];
+            $qual->percentage = $data['percentage'];
+            $qual->passing_year = $data['passing_year'];
+            $qual->board_name = $data['board_name'];
+            $qual->institute_name = $data['institute_name'];
+            $qual->save();
+        }
+        return back();
+    }
+    public function profile()
+    {
+        $user = Auth::user();
+        $profile = $user->qualification;
+        return view('admin.pages.profile', compact('user', 'profile'));
+    }
     public function home()
     {
         $categories = Category::all();
         $courses = Course::take(4)->get();
         return view('welcome', compact('categories', 'courses'));
+    }
+    public function information(Request $req)
+    {
+        $user = Auth::user();
+        $existing = Information::where('user_id', $user->id)->first();
+
+        if ($existing) {
+            return redirect('dashboard')->with('error', 'Information already added!');
+        }
+        $info = new Information;
+        $info->user_id = $user->id;
+        $info->first_name = $req->first_name;
+        if ($req->has('middle_name')) {
+            $info->middle_name = $req->middle_name;
+        }
+        if ($req->has('last_name')) {
+            $info->last_name = $req->last_name;
+        }
+        $info->date_of_birth = $req->date_of_birth;
+        $info->phone = $req->phone;
+        $info->permanent_address = $req->permanent_address;
+        $info->current_address = $req->current_address;
+        $info->city = $req->city;
+        $info->state = $req->state;
+        $info->emergency_number = $req->emergency_number;
+        $info->save();
+        return redirect('dashboard');
+    }
+    public function apply(Request $req)
+    {
+        $user = Auth::user();
+        $app = new Application;
+        $alreadyApplied = Application::where('user_id', $user->id)
+            ->where('course_id', $req->course_id)
+            ->first();
+        if (!$user->information) {
+            return redirect()->back()->with('error', 'Please complete your personal information before applying.');
+        }
+        if ($alreadyApplied) {
+            return back()->with('error', 'You have already applied for this course.');
+        }
+        $app->user_id = $user->id;
+        $app->course_id = $req->course_id;
+        $app->save();
+        return back()->with('success', 'Your application has been submitted.');
+    }
+    public function applications()
+    {
+        $user = Auth::user();
+        $applications = Application::all();
+        $userapplication = $user->applications;
+        $info = $user->information;
+        return view('admin.pages.applications', compact('applications', 'userapplication', 'info'));
+    }
+    public function application($id)
+    {
+        $user = Auth::user();
+        $application = Application::find($id);
+        return view('admin.pages.viewapplication', compact('application'));
+    }
+    public function approved(Request $req, $id)
+    {
+        $app = Application::find($id);
+        $app->status = $req->status;
+        $app->save();
+        return back()->with('success', "Application has been approved!");
     }
 }
