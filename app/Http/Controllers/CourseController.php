@@ -11,6 +11,11 @@ use App\Models\User;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\EnrollmentMail;
+use App\Mail\NewApplicationNotification;
+use App\Mail\StatusUpdateMail;
+use App\Mail\UserDeletedMail;
 use PDO;
 
 class CourseController extends Controller
@@ -25,6 +30,11 @@ class CourseController extends Controller
         $userapplication = $authuser->applications;
         $userappcount = $authuser->applications->count();
         return view('admin.dashboard', compact('courses', 'user', 'categories', 'userapplication', 'userappcount', 'applications'));
+    }
+    public function Users()
+    {
+        $user = User::where('admin', 0)->get();
+        return view('admin.pages.users', compact('user'));
     }
     public function addcourseshow()
     {
@@ -121,6 +131,21 @@ class CourseController extends Controller
         $profile = $user->qualification;
         return view('admin.pages.profile', compact('user', 'profile'));
     }
+    public function usersprofile($id)
+    {
+
+        $user = User::find($id);
+        return view('admin.pages.usersprofile', compact('user'));
+    }
+    public function userDelete($id)
+    {
+        $user = User::find($id);
+        $userEmail = $user->email;
+        $userName = $user->name;
+        Mail::to($userEmail)->send(new UserDeletedMail($userName));
+        $user->delete();
+        return back()->with('success', 'User has been deleted successfully');
+    }
     public function home()
     {
         $categories = Category::all();
@@ -157,7 +182,7 @@ class CourseController extends Controller
     public function apply(Request $req)
     {
         $user = Auth::user();
-        $app = new Application;
+        $application = new Application;
         $alreadyApplied = Application::where('user_id', $user->id)
             ->where('course_id', $req->course_id)
             ->first();
@@ -167,9 +192,11 @@ class CourseController extends Controller
         if ($alreadyApplied) {
             return back()->with('error', 'You have already applied for this course.');
         }
-        $app->user_id = $user->id;
-        $app->course_id = $req->course_id;
-        $app->save();
+        $application->user_id = $user->id;
+        $application->course_id = $req->course_id;
+        $application->save();
+        Mail::to($user->email)->send(new EnrollmentMail($user, $application));
+        Mail::to('asadullah.dev.web@gmail.com')->send(new NewApplicationNotification($user, $application));
         return back()->with('success', 'Your application has been submitted.');
     }
     public function applications()
@@ -188,9 +215,10 @@ class CourseController extends Controller
     }
     public function approved(Request $req, $id)
     {
-        $app = Application::find($id);
-        $app->status = $req->status;
-        $app->save();
-        return back()->with('success', "Application has been approved!");
+        $application = Application::find($id);
+        $application->status = $req->status;
+        $application->save();
+        Mail::to($application->user->email)->send(new StatusUpdateMail($application->user, $application));
+        return back()->with('success', "Application status has been updated!");
     }
 }

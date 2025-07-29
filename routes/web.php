@@ -45,17 +45,17 @@ Route::middleware([AdminMiddleware::class])->prefix('dashboard')->group(function
     Route::get('updatecourse/{id}', [CourseController::class, 'showcourse'])->name('updatecourse');
     Route::post('updatecourse/{id}', [CourseController::class, 'updatecourse'])->name('updatecourse');
     Route::post('status/{id}', [CourseController::class, 'approved'])->name('status');
+    Route::get('users', [CourseController::class, 'Users'])->name('users');
+    Route::get('user/{id}', [CourseController::class, 'usersprofile'])->name('usersprofile');
+    Route::get('userdelete/{id}', [CourseController::class, 'userDelete'])->name('userDelete');
 });
 //  -------------------- ADMIN -------------------------------
 // ===========================================================
 // ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
-Route::view('/mail', 'mail/mailform')->name('mail');
-Route::post('mailsend', [HomeController::class, 'mail'])->name('sendmail');
 Route::view('dashboard1', 'admin.dashboard')->name('dashboard1');
 Route::view('dummy', 'dummydata')->name('dummy');
 Route::view('course', 'pages.singlecourse')->name('course');
 Route::get("/", [CourseController::class, 'home'])->name('home');
 Route::view('/addpost', 'pages/addpost')->name('addpost');
-Route::post("/add", [HomeController::class, "Add"])->name("add");
 Route::view('qualification', 'pages.addqualification')->name('qualification');
 Route::get('singlecourse/{id}', [CourseController::class, 'singlecourse'])->name('singlecourse');

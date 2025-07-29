@@ -1,7 +1,7 @@
   @extends('admin.adminlayout')
   @section('title', 'Profile')
   @section('content')
-      @if (auth()->user()->admin != true)
+      @if (auth()->user()->admin == true)
 
           <div class="container my-4">
 
